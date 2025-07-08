@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raghu Varma Uppalapati - Data Analyst Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Instrument Serif for headings and display text -->
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <!-- Inter for body text and general UI elements -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif; /* Default body font set to Inter */
+            background-color: #FFFFFF;
+            color: #000000;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: 100px; /* Adjusted padding to prevent content from being hidden under the fixed nav */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        /* Headings and Logo - using Instrument Serif for a distinct look */
+        h1, h2, h3, .logo {
+            font-family: "Instrument Serif", serif;
+            font-weight: 700; /* Bold variant for headings */
+            transition: color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px; /* Separated from the top */
+            left: 50%;
+            transform: translateX(-50%); /* Center the nav bar */
+            width: calc(100% - 40px); /* Reduced width for separation and rounded corners */
+            max-width: 1200px; /* Max width to keep it contained */
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+            border-radius: 20px; /* Rounded corners */
+            background-color: #FFFFFF; /* Ensure background is white when not scrolled */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        nav.scrolled {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E5E5E5;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow when scrolled */
+        }
+
+        nav .nav-container {
+            max-width: 1200px; /* Keep content within max width */
+            margin: 0 auto;
+            padding: 0 40px; /* Inner padding for links */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            text-decoration: none;
+            color: #000000;
+            transition: color 0.2s ease;
+        }
+
+        .logo:hover {
+            color: #BFBFBF;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 400;
+            transition: color 0.2s ease, text-decoration 0.3s ease, text-underline-offset 0.3s ease; /* Added transitions for underline */
+            font-family: "Instrument Serif", serif; /* Changed to Instrument Serif for nav links */
+            font-weight: 600; /* Slightly bold for nav links */
+        }
+
+        .nav-links a:hover {
+            color: #BFBFBF;
+        }
+
+        .nav-links a.active {
+            text-decoration: underline;
+            text-underline-offset: 8px; /* Space between text and underline */
+            text-decoration-thickness: 2px; /* Thickness of the underline */
+            text-decoration-color: #000000; /* Color of the underline */
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Sections */
+        section {
+            padding: 10rem 0;
+            position: relative; /* For fade-in animation */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        section.hero {
+            padding: 10rem 0 10rem; /* Reduced top padding */
+            position: relative; /* Needed for positioning floating icons */
+            overflow: hidden; /* Hide icons if they float too far out */
+            display: flex; /* Use flexbox for vertical centering */
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            min-height: calc(100vh - 100px); /* Adjust min-height to fill viewport minus body padding */
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Slower and smoother */
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            background: linear-gradient(180deg, #f8f8f8 0%, #ffffff 100%); /* Subtle gradient */
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: #000000;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #666666; /* Slightly darker grey */
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            color: #333333;
+            font-family: "Inter", sans-serif; /* Tagline also Inter */
+            font-style: normal; /* Default to normal for light theme */
+        }
+
+        .hero .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Floating Icons */
+        .floating-icon {
+            position: absolute;
+            font-size: 3rem; /* Base size for icons */
+            opacity: 0.6; /* Slightly transparent */
+            animation: float 6s ease-in-out infinite; /* Floating animation */
+            z-index: 0; /* Behind text */
+        }
+
+        /* Define floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); opacity: 0.6; }
+            50% { transform: translateY(-20px); opacity: 0.8; }
+            100% { transform: translateY(0px); opacity: 0.6; }
+        }
+
+        /* Specific icon positioning and colors */
+        .icon-data {
+            top: 20%;
+            left: 10%;
+            color: #FF6B6B; /* Reddish */
+            animation-delay: 0s;
+        }
+        .icon-finance {
+            top: 15%;
+            right: 15%;
+            color: #4ECDC4; /* Teal */
+            animation-delay: 1s;
+        }
+        .icon-tech {
+            bottom: 25%;
+            left: 20%;
+            color: #45B7D1; /* Bluish */
+            animation-delay: 2s;
+        }
+        .icon-viz {
+            bottom: 10%;
+            right: 10%;
+            color: #F7B731; /* Yellowish */
+            animation-delay: 3s;
+        }
+        .icon-idea {
+            top: 50%;
+            left: 5%;
+            color: #A16BFF; /* Purple */
+            animation-delay: 4s;
+        }
+        .icon-brain {
+            top: 60%;
+            right: 5%;
+            color: #FFD166; /* Orange */
+            animation-delay: 0.5s;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #000000;
+            cursor: pointer;
+            background: none;
+            font-family: "Inter", sans-serif;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background-color: #FFFFFF;
+            color: #000000;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        .btn-secondary:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Specific style for outline buttons */
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #000000;
+            color: #000000;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 60px;
+            align-items: start;
+            background-color: #FDFDFD;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .about-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #BFBFBF 0%, #999999 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 60px;
+            font-weight: 300;
+            border: 4px solid #FFFFFF;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: #000000;
+        }
+
+        .about-summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 500;
+            color: #444444;
+            font-family: "Inter", sans-serif;
+        }
+
+        .about-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .fact-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #E5E5E5;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-family: "Inter", sans-serif;
+            transition: border-color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .fact-item:nth-child(odd) {
+            border-right: 1px solid #E5E5E5;
+            padding-right: 30px;
+        }
+
+        .fact-item:nth-child(even) {
+            padding-left: 30px;
+        }
+
+        .fact-item:nth-last-child(-n + 2) {
+            border-bottom: none;
+        }
+
+        /* Projects Section */
+        .projects h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #000000;
+        }
+
+        .projects-carousel {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .project-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Featured Project - Amazon Sales Analysis */
+        .project-card.featured {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #FFFFFF;
+            border: 2px solid #000000;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: 1;
+        }
+
+        .project-card.featured:hover::before {
+            transform: translateX(100%);
+        }
+
+        .project-card.featured .project-image {
+            background: linear-gradient(45deg, #444444, #666666);
+            color: #FFFFFF;
+            border: 2px solid #666666;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card.featured h3 {
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card.featured p {
+            color: #CCCCCC;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+            font-family: "Inter", sans-serif;
+        }
+
+        /* Specific styling for buttons within the featured project card */
+        .project-card.featured .btn-secondary {
+            background-color: #FFFFFF;
+            color: #000000;
+            border-color: #000000;
+        }
+
+        .project-card.featured .btn-secondary:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+        }
+
+
+        /* Featured project layout */
+        .featured-project {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .featured-project .project-image {
+            width: 100%;
+            height: 300px;
+            background-color: #BFBFBF; /* Changed to solid color for simplicity */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .featured-project .project-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .featured-project .project-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #CCCCCC;
+        }
+
+        .featured-project .project-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .featured-project .project-buttons .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+        }
+
+        /* Other projects grid */
+        .other-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 180px;
+            background-color: #BFBFBF;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 14px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .project-card ul {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #666;
+            font-family: "Inter", sans-serif;
+            padding-left: 20px;
+            list-style: disc;
+        }
+
+        .project-card ul li {
+            margin-bottom: 5px;
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .project-buttons .btn {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        /* Achievements Section (Certifications & Education) */
+        .achievements h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #000000;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #E5E5E5;
+            transition: background-color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            background-color: #FDFDFD;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 28px;
+            width: 12px;
+            height: 12px;
+            background-color: #000000;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            z-index: 1;
+            transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .timeline-year {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #333333;
+            font-family: "Inter", sans-serif;
+        }
+
+        .timeline-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+            font-family: "Inter", sans-serif;
+        }
+
+        .timeline-description strong {
+            color: #000000;
+            font-family: "Inter", sans-serif;
+        }
+
+        .timeline-description ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            color: #666;
+            list-style: disc;
+            font-family: "Inter", sans-serif;
+        }
+
+        .timeline-description ul li {
+            margin-bottom: 5px;
+        }
+
+        /* Hobbies Section */
+        .hobbies {
+            background-color: #FDFDFD;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .hobbies h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            color: #000000;
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .hobby-item {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border 0.3s ease; /* Smooth transition for theme change */
+            text-align: center;
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hobby-item .icon {
+            font-size: 2.5rem; /* Reduced icon size */
+            color: #000000;
+            margin-bottom: 15px; /* Added whitespace below icon */
+            transition: color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .hobby-item h3 {
+            font-family: "Instrument Serif", serif; /* Hobby titles use Instrument Serif */
+            font-size: 1.4rem;
+            font-weight: 500; /* Made lighter */
+            margin-bottom: 0; /* Removed margin-bottom to pull heading closer to icon */
+        }
+
+
+        /* Contact Section */
+        .contact h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #000000;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            background-color: #FDFDFD;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333333;
+            font-family: "Inter", sans-serif;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #E5E5E5;
+            border-radius: 4px;
+            font-family: "Inter", sans-serif;
+            font-size: 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-details h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #444444;
+            font-family: "Inter", sans-serif;
+        }
+
+        .contact-item span {
+            font-size: 1.5rem;
+        }
+
+        .contact-item a {
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-item a:hover {
+            color: #BFBFBF;
+        }
+
+        /* Resume Section */
+        .resume {
+            text-align: center;
+            padding: 5rem 0;
+            background-color: #F8F8F8;
+            border-top: 1px solid #E5E5E5;
+            border-bottom: 1px solid #E5E5E5;
+            transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #E5E5E5;
+            padding: 40px 0;
+            background-color: #FFFFFF;
+            color: #666;
+            font-family: "Inter", sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #BFBFBF;
+        }
+
+        /* Theme Switch Styles */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the switch */
+            margin-left: 20px; /* Space from Contact link */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #000000; /* Dark mode default for slider background */
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #E5E5E5; /* Light mode for slider background */
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            background-color: #000000; /* Dark knob for light mode */
+        }
+
+        /* Dark Theme - Glassmorphism */
+        body.dark-theme {
+            background-color: #0a0a0a; /* Almost black background */
+            color: #f0f0f0; /* Light text */
+        }
+
+        body.dark-theme h1,
+        body.dark-theme h2,
+        body.dark-theme h3,
+        body.dark-theme .logo,
+        body.dark-theme .nav-links a {
+            color: #f0f0f0; /* Light headings and nav links */
+        }
+
+        body.dark-theme nav {
+            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+        }
+
+        /* Adjust specific dark theme styles for elements that now have glassmorphism */
+        body.dark-theme nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.08); /* Slightly more opaque when scrolled */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark-theme .nav-links a.active {
+            text-decoration-color: #f0f0f0; /* Light underline for active link */
+        }
+
+        body.dark-theme .hero {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%); /* Adjust hero gradient to match new dark background */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .hero h2,
+        body.dark-theme .tagline {
+            color: #cccccc; /* Lighter grey for hero subtext */
+            font-style: italic; /* Tagline italic in dark theme */
+        }
+
+        body.dark-theme .btn-primary {
+            background-color: #f0f0f0; /* Light button background */
+            color: #1a1a1a; /* Dark button text */
+            border-color: #f0f0f0;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .btn-primary:hover {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        body.dark-theme .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1); /* Translucent secondary button */
+            color: #f0f0f0;
+            border-color: #f0f0f0;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #f0f0f0;
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        body.dark-theme .btn-outline {
+            background-color: transparent;
+            border: 2px solid #f0f0f0; /* White outline */
+            color: #f0f0f0; /* White text */
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+        }
+
+        body.dark-theme .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Slight fill on hover */
+            color: #f0f0f0;
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        body.dark-theme .about {
+            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+        }
+
+        body.dark-theme .about-image {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%);
+            border: 4px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-theme .about-summary,
+        body.dark-theme .fact-item,
+        body.dark-theme .timeline-description,
+        body.dark-theme .contact-item {
+            color: #cccccc; /* Lighter grey for text */
+        }
+
+        body.dark-theme .fact-item strong,
+        body.dark-theme .timeline-description strong,
+        body.dark-theme .timeline-year {
+            color: #f0f0f0; /* Light strong text and years */
+        }
+
+        body.dark-theme .fact-item:nth-child(odd),
+        body.dark-theme .fact-item:nth-child(even) {
+            border-color: rgba(255, 255, 255, 0.1); /* Darker borders for glass elements */
+        }
+
+        body.dark-theme .project-card:not(.featured) {
+            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+        }
+
+        body.dark-theme .project-card.featured {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(51, 51, 51, 0.4) 100%); /* Keep dark for featured, but make translucent */
+            backdrop-filter: blur(8px); /* Apply blur to featured card too */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-theme .project-card.featured::before {
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%); /* Lighter shimmer */
+        }
+
+        body.dark-theme .project-card.featured .project-image {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.15));
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark-theme .project-card.featured .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #f0f0f0;
+            border-color: #f0f0f0;
+        }
+
+        body.dark-theme .project-card.featured .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            color: #f0f0f0;
+            border-color: #f0f0f0;
+        }
+
+        body.dark-theme .project-card ul {
+            color: #cccccc;
+        }
+
+        body.dark-theme .timeline::before {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .timeline-item {
+            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+        }
+
+        body.dark-theme .timeline-item::before {
+            background-color: #f0f0f0;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .hobbies {
+            /* Removed background and glassmorphism from the main hobbies section */
+            background-color: transparent;
+            box-shadow: none;
+            border: none;
+            backdrop-filter: none;
+        }
+
+        body.dark-theme .hobby-item { /* Specific glassmorphism for hobby items */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px); /* Slightly less blur for individual items */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-theme .hobby-item .icon {
+            color: #f0f0f0;
+        }
+
+        body.dark-theme .contact-content {
+            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+        }
+
+        body.dark-theme .form-group label {
+            color: #f0f0f0; /* Made labels white in dark theme */
+        }
+
+        body.dark-theme .form-group input,
+        body.dark-theme .form-group textarea {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #f0f0f0;
+        }
+
+        body.dark-theme .form-group input:focus,
+        body.dark-theme .form-group textarea:focus {
+            border-color: #f0f0f0;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .contact-item a {
+            color: #f0f0f0;
+        }
+
+        body.dark-theme .contact-item a:hover {
+            color: #cccccc;
+        }
+
+        body.dark-theme .resume {
+            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+        }
+
+        body.dark-theme footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            color: #cccccc;
+            box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+        }
+
+        body.dark-theme .footer-links a {
+            color: #f0f0f0;
+        }
+
+        body.dark-theme .footer-links a:hover {
+            color: #cccccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .about {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 30px;
+            }
+
+            .about-image {
+                justify-self: center;
+                margin-bottom: 30px;
+            }
+
+            .about-facts {
+                grid-template-columns: 1fr;
+            }
+
+            .fact-item {
+                border-right: none !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                border-bottom: 1px solid #E5E5E5;
+                align-items: center;
+            }
+
+            .fact-item:last-child {
+                border-bottom: none;
+            }
+
+            .featured-project {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .featured-project .project-content {
+                order: 2;
+            }
+
+            .featured-project .project-image {
+                order: 1;
+            }
+
+            .other-projects {
+                grid-template-columns: 1fr;
+            }
+
+            .hobbies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+
+            .contact-details {
+                margin-top: 40px;
+                text-align: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 599px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            nav .nav-container {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Adjust nav padding and position for smaller screens if needed */
+            nav {
+                width: calc(100% - 20px); /* Slightly less width for very small screens */
+                top: 10px; /* Closer to top */
+                border-radius: 10px; /* Smaller rounded corners */
+            }
+
+            body {
+                padding-top: 70px; /* Adjust body padding for smaller nav */
+            }
+
+            section.hero {
+                min-height: calc(100vh - 70px); /* Adjust hero min-height */
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                padding: 5rem 0;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">Raghu Varma .U</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox" aria-label="Toggle dark and light theme">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <!-- Floating Icons -->
+            <i class="fas fa-chart-line floating-icon icon-data"></i>
+            <i class="fas fa-dollar-sign floating-icon icon-finance"></i>
+            <i class="fas fa-laptop-code floating-icon icon-tech"></i>
+            <i class="fas fa-lightbulb floating-icon icon-idea"></i>
+            <i class="fas fa-brain floating-icon icon-brain"></i>
+            <i class="fas fa-chart-area floating-icon icon-viz"></i>
+
+
+            <div class="fade-in">
+                <h1>Raghu Varma Uppalapati</h1>
+                <h2>Data | Finance | Tech — Insight-Driven Storytelling</h2>
+                <p class="tagline">Turning raw numbers into clear business direction</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary" aria-label="View my projects">View My Projects</a>
+                    <a href="https://placehold.co/300x200/cccccc/000000?text=Resume+Placeholder" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Download resume PDF">Download Résumé</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about fade-in">
+                <div class="about-image" aria-label="Profile picture placeholder">
+                    RV
+                </div>
+                <div class="about-content">
+                    <h2>About Me</h2>
+                    <p class="about-summary">
+                        Detail-oriented aspiring Data Analyst skilled in Excel, SQL and Power BI. Adept at designing interactive dashboards, cleaning data and interpreting trends to guide business decisions.
+                    </p>
+                    <div class="about-facts">
+                        <div class="fact-item">
+                            <strong>🎓 MBA (Tech Management)</strong><br>
+                            Osmania University '26
+                        </div>
+                        <div class="fact-item">
+                            <strong>📊 Experience in</strong><br>
+                            Excel, SQL • Power BI
+                        </div>
+                        <div class="fact-item">
+                            <strong>🛠️ Tools</strong><br>
+                            GitHub • PowerPoint • Word
+                        </div>
+                        <div class="fact-item">
+                            <strong>💡 Focus</strong><br>
+                            Data Analysis • Business Intelligence
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="fade-in">Projects</h2>
+            <div class="projects-carousel fade-in">
+                <!-- Featured Project - Amazon Sales Analysis -->
+                <div class="project-card featured">
+                    <div class="featured-project">
+                        <div class="project-image" aria-label="Amazon Sales Analysis project screenshot">
+                            Amazon Dashboard<br>Screenshot Coming Soon
+                        </div>
+                        <div class="project-content">
+                            <h3>🌟 Amazon Sales Analysis (2025)</h3>
+                            <p>Comprehensive analysis of Amazon order data with advanced data cleaning, pivot tables, and interactive Power BI visualizations. Uncovered key revenue drivers, seasonal patterns, and customer behavior insights that drive business decisions.</p>
+                            <div class="project-buttons">
+                                <a href="https://github.com/USERNAME/amazon-sales-analysis" class="btn btn-secondary" aria-label="View Amazon project on GitHub">GitHub Repository</a>
+                                <a href="https://app.powerbi.com/view?r=eyJrIjoiYOUR_POWERBI_REPORT_ID" class="btn btn-secondary" aria-label="View Amazon project Power BI dashboard">Power BI Live Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Projects -->
+                <div class="project-card">
+                    <div class="project-image" aria-label="Power BI Regional Sales Dashboard project screenshot">
+                        <img src="https://placehold.co/320x180/BFBFBF/FFFFFF?text=PowerBI+Sales" alt="Power BI Regional Sales Dashboard screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3>Power BI Regional Sales Dashboard (2024)</h3>
+                    <ul>
+                        <li>Designed an interactive Power BI dashboard for category-wise and region-wise sales performance using 5K+ fictional data.</li>
+                        <li>Applied data transformation techniques and DAX measures to extract KPIs such as Sales Growth, Top Products, and Revenue Trends.</li>
+                        <li>Enabled decision-making through slicers and drill-through visuals.</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <a href="https://github.com/USERNAME/powerbi-regional-sales" class="btn btn-secondary" aria-label="View Power BI project on GitHub">GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image" aria-label="Excel Chocolate Manufacturing Dashboard project screenshot">
+                        <img src="https://placehold.co/320x180/BFBFBF/FFFFFF?text=Excel+Chocolate" alt="Excel Chocolate Manufacturing Dashboard screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3>Excel Sales & Performance Dashboard (2024)</h3>
+                    <ul>
+                        <li>Developed an Excel dashboard with dynamic charts and KPIs like Total Revenue, Average Revenue per Salesperson, and Products Sold.</li>
+                        <li>Implemented data bars and a Top 5 Salespersons table with region/category breakdown using conditional formatting and pivot charts.</li>
+                        <li>Focused on clarity and storytelling in layout for non-technical stakeholders.</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <a href="https://github.com/USERNAME/excel-chocolate-dashboard" class="btn btn-secondary" aria-label="View Excel project on GitHub">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="achievements">
+        <div class="container">
+            <h2 class="fade-in">Education</h2>
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 - Present</div>
+                    <div class="timeline-description">
+                        <strong>MBA in Technology Management & Finance</strong><br>
+                        <em>Osmania University • Expected Graduation: 2026</em>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2021 - 2024</div>
+                    <div class="timeline-description">
+                        <strong>B.Sc. Computer Science & Statistics</strong><br>
+                        <em>82% • First Class</em>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2019 - 2021</div>
+                    <div class="timeline-description">
+                        <strong>Higher Secondary Certificate (12th Grade)</strong><br>
+                        <em>Economics & Commerce • 92% • First Class with Distinction</em>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-description">
+                        <strong>Secondary School Certificate (10th Grade)</strong><br>
+                        <em>95% • First Class with Distinction</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="achievements">
+        <div class="container">
+            <h2 class="fade-in">Certifications</h2>
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-description">
+                        <strong>Google Data Analytics Professional Certificate</strong><br>
+                        <em>Google Career Certificates via Coursera</em>
+                        <ul>
+                            <li>Mastered data cleaning, analysis, and visualization using SQL, R, and Tableau</li>
+                            <li>Completed hands-on projects analyzing real-world datasets and creating actionable insights</li>
+                            <li>Gained proficiency in statistical analysis, data storytelling, and business intelligence reporting</li>
+                        </ul>
+                        <div style="margin-top: 15px;">
+                            <a href="https://coursera.org/verify/professional-cert/YOUR_CERTIFICATE_ID" class="btn btn-outline" target="_blank" rel="noopener noreferrer" aria-label="View Google Data Analytics Certificate on Coursera">
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="hobbies">
+        <div class="container">
+            <h2 class="fade-in">Hobbies</h2>
+            <div class="hobbies-grid fade-in">
+                <div class="hobby-item">
+                    <i class="icon fas fa-chart-bar"></i> <!-- Data Visualization Icon -->
+                    <h3>Exploring Data Visualization</h3>
+                </div>
+                <div class="hobby-item">
+                    <i class="icon fas fa-film"></i> <!-- Global Cinema Icon -->
+                    <h3>Watching Global Cinema</h3>
+                </div>
+                <div class="hobby-item">
+                    <i class="icon fas fa-pencil-ruler"></i> <!-- Design Tools Icon -->
+                    <h3>Learning Design Tools</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="fade-in">Contact Me</h2>
+            <div class="contact-content fade-in">
+                <form class="contact-form" action="mailto:raghuvarmauppalapati1@gmail.com" method="POST" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required aria-label="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required aria-label="Your email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required aria-label="Your message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" aria-label="Send message">Send Message</button>
+                </form>
+                <div class="contact-details">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-item">
+                        <span><i class="fa-solid fa-envelope"></i></span>
+                        <a href="mailto:raghuvarmauppalapati1@gmail.com" aria-label="Email Raghu">raghuvarmaupalapati1@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span><i class="fab fa-linkedin"></i></span>
+                        <a href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">LinkedIn</a>
+                    </div>
+                    <div class="contact-item">
+                        <span><i class="fab fa-github"></i></span>
+                        <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Download Section -->
+    <section class="resume">
+        <div class="container">
+            <div class="fade-in">
+                <a href="https://placehold.co/300x200/cccccc/000000?text=Resume+Placeholder" class="btn btn-primary" target="_blank" rel="noopener noreferrer" aria-label="Download PDF resume">
+                    ⬇️ Download PDF Résumé
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>© 2025 Raghu Varma Uppalapati</div>
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:raghuvarmauppalapati1@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Analytics placeholder -->
+    <div id="google-analytics" style="display: none;" data-ua-id="UA-XXXXXXXXX-X"></div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            // Adjust scroll threshold based on new nav bar position and height
+            if (window.scrollY > 30) { /* Reduced threshold as nav is already lower */
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for active navigation links
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        const observerOptions = {
+            root: null, // Use the viewport as the root
+            rootMargin: '-50% 0px -50% 0px', // When 50% of the section is in view
+            threshold: 0 // No threshold needed, as rootMargin handles it
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const correspondingLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+
+                if (entry.isIntersecting) {
+                    // Remove active class from all links first
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    // Add active class to the current section's link
+                    if (correspondingLink) {
+                        correspondingLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe each section
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Fade-in on scroll
+        const fadeObserverOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const fadeObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: Unobserve after becoming visible if you only want it to fade in once
+                    // fadeObserver.unobserve(entry.target);
+                } else {
+                    // Optional: Remove 'visible' if you want elements to fade out when scrolled away
+                    // entry.target.classList.remove('visible');
+                }
+            });
+        }, fadeObserverOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            fadeObserver.observe(el);
+        });
+
+        // Show first section immediately
+        document.querySelector('.hero .fade-in').classList.add('visible');
+
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('checkbox');
+        const body = document.body;
+
+        // Function to set theme
+        function setTheme(isDark) {
+            if (isDark) {
+                body.classList.add('dark-theme');
+                themeToggle.checked = false; // Checkbox is unchecked for dark theme
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-theme');
+                themeToggle.checked = true; // Checkbox is checked for light theme
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            setTheme(false); // Apply light theme if saved
+        } else {
+            setTheme(true); // Default to dark theme
+        }
+
+        // Event listener for toggle
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                setTheme(false); // Switch to light
+            } else {
+                setTheme(true); // Switch to dark
+            }
+        });
+    </script>
+</body>
+</html>
