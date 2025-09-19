@@ -54,7 +54,7 @@
             z-index: 1000;
             transition: all 0.3s ease;
             padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+            box-shadow: 0 2-3px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
             border-radius: 20px; /* Rounded corners */
             background-color: #FFFFFF; /* Ensure background is white when not scrolled */
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease; /* Smooth transition for theme change */
@@ -274,7 +274,7 @@
         .btn-secondary:hover {
             background-color: #000000;
             color: #FFFFFF;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6-3px 12px rgba(0, 0, 0, 0.2);
         }
 
         /* Specific style for outline buttons */
@@ -294,31 +294,49 @@
         /* About Section */
         .about {
             display: grid;
-            grid-template-columns: 180px 1fr;
+            grid-template-columns: 4fr 3fr; /* New: 4:3 ratio for content and image */
             gap: 60px;
-            align-items: start;
+            align-items: center;
             background-color: #FDFDFD;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .about-image {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
+            width: 100%;
+            padding-bottom: 133.33%; /* 4:3 Aspect Ratio for Vertical image (100 / 3 * 4 = 133.33) */
+            height: 0;
+            position: relative;
             background: linear-gradient(135deg, #BFBFBF 0%, #999999 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #FFFFFF;
-            font-size: 60px;
-            font-weight: 300;
+            border-radius: 8px; /* Changed to rounded rectangle for vertical image */
+            overflow: hidden;
             border: 4px solid #FFFFFF;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             flex-shrink: 0;
-            transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+            transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-content {
+            grid-column: 1 / 2; /* Ensure content is in the first column */
+        }
+
+        .about-image {
+            grid-column: 2 / 3; /* Ensure image is in the second column */
         }
 
         .about-content h2 {
@@ -341,6 +359,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
+            align-items: start;
         }
 
         .fact-item {
@@ -366,6 +385,59 @@
             border-bottom: none;
         }
 
+        /* Skills Section Styles */
+        .skills h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #000000;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .skill-item {
+            background-color: #FDFDFD;
+            border: 1px solid #E5E5E5;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border 0.3s ease;
+            text-align: center;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-item .icon {
+            font-size: 2.5rem;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .skill-item h3 {
+            font-family: "Instrument Serif", serif;
+            font-weight: 500;
+            font-size: 1.4rem;
+            margin-bottom: 0;
+        }
+
+        .skill-item p {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
+            color: #666;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
         /* Projects Section */
         .projects h2 {
             font-size: 2.5rem;
@@ -378,6 +450,13 @@
         .projects-carousel {
             display: flex;
             flex-direction: column;
+            gap: 40px;
+        }
+        
+        /* New Styles for side-by-side projects */
+        .other-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
         }
 
@@ -437,11 +516,12 @@
         }
 
         .project-card.featured p {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
             color: #CCCCCC;
             font-size: 1.1rem;
             position: relative;
             z-index: 2;
-            font-family: "Inter", sans-serif;
         }
 
         /* Specific styling for buttons within the featured project card */
@@ -477,6 +557,13 @@
             font-size: 16px;
             border-radius: 8px;
             overflow: hidden;
+        }
+        
+        .project-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This is key to making the image fit the container */
+            border-radius: 8px;
         }
 
         .featured-project .project-content h3 {
@@ -531,11 +618,12 @@
         }
 
         .project-card ul {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 20px;
             color: #666;
-            font-family: "Inter", sans-serif;
             padding-left: 20px;
             list-style: disc;
         }
@@ -555,7 +643,7 @@
             font-size: 14px;
         }
 
-        /* Achievements Section (Certifications & Education) */
+        /* Achievements Section (Certifications & Education & Experience) */
         .achievements h2 {
             font-size: 2.5rem;
             font-weight: 300;
@@ -589,7 +677,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* Smooth transition for theme change */
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border 0.3s ease; /* Smooth transition for theme change */
         }
 
         .timeline-item:hover {
@@ -612,31 +700,34 @@
         }
 
         .timeline-year {
+            font-family: "Inter", sans-serif;
             font-weight: 600;
             font-size: 1.1rem;
             margin-bottom: 8px;
             color: #333333;
-            font-family: "Inter", sans-serif;
         }
 
         .timeline-description {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
             font-size: 1rem;
             line-height: 1.6;
             color: #666;
-            font-family: "Inter", sans-serif;
         }
 
         .timeline-description strong {
-            color: #000000;
             font-family: "Inter", sans-serif;
+            font-weight: 700;
+            color: #000000;
         }
 
         .timeline-description ul {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
             margin-top: 10px;
             padding-left: 20px;
             color: #666;
             list-style: disc;
-            font-family: "Inter", sans-serif;
         }
 
         .timeline-description ul li {
@@ -650,7 +741,7 @@
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             text-align: center;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .hobbies h2 {
@@ -674,7 +765,7 @@
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border 0.3s ease; /* Smooth transition for theme change */
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border 0.3s ease;
             text-align: center;
         }
 
@@ -684,19 +775,18 @@
         }
 
         .hobby-item .icon {
-            font-size: 2.5rem; /* Reduced icon size */
+            font-size: 2.5rem;
             color: #000000;
-            margin-bottom: 15px; /* Added whitespace below icon */
-            transition: color 0.3s ease; /* Smooth transition for theme change */
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
         }
 
         .hobby-item h3 {
-            font-family: "Instrument Serif", serif; /* Hobby titles use Instrument Serif */
+            font-family: "Instrument Serif", serif;
+            font-weight: 500;
             font-size: 1.4rem;
-            font-weight: 500; /* Made lighter */
-            margin-bottom: 0; /* Removed margin-bottom to pull heading closer to icon */
+            margin-bottom: 0;
         }
-
 
         /* Contact Section */
         .contact h2 {
@@ -715,7 +805,7 @@
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for theme change */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .contact-form {
@@ -729,20 +819,21 @@
         }
 
         .form-group label {
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333333;
             font-family: "Inter", sans-serif;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #333333;
         }
 
         .form-group input,
         .form-group textarea {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
             padding: 12px;
             border: 1px solid #E5E5E5;
             border-radius: 4px;
-            font-family: "Inter", sans-serif;
             font-size: 16px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
         }
 
         .form-group input:focus,
@@ -760,12 +851,13 @@
         }
 
         .contact-item {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
             color: #444444;
-            font-family: "Inter", sans-serif;
         }
 
         .contact-item span {
@@ -789,7 +881,7 @@
             background-color: #F8F8F8;
             border-top: 1px solid #E5E5E5;
             border-bottom: 1px solid #E5E5E5;
-            transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition for theme change */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         /* Footer */
@@ -799,7 +891,8 @@
             background-color: #FFFFFF;
             color: #666;
             font-family: "Inter", sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transition for theme change */
+            font-weight: 400;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         .footer-content {
@@ -830,9 +923,9 @@
         .theme-switch-wrapper {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center the switch */
-            margin-left: 20px; /* Space from Contact link */
-            flex-shrink: 0; /* Prevent shrinking */
+            justify-content: center;
+            margin-left: 20px;
+            flex-shrink: 0;
         }
 
         .theme-switch {
@@ -855,7 +948,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #000000; /* Dark mode default for slider background */
+            background-color: #000000;
             transition: .4s;
             border-radius: 34px;
         }
@@ -873,18 +966,18 @@
         }
 
         input:checked + .slider {
-            background-color: #E5E5E5; /* Light mode for slider background */
+            background-color: #E5E5E5;
         }
 
         input:checked + .slider:before {
             transform: translateX(26px);
-            background-color: #000000; /* Dark knob for light mode */
+            background-color: #000000;
         }
 
         /* Dark Theme - Glassmorphism */
         body.dark-theme {
-            background-color: #0a0a0a; /* Almost black background */
-            color: #f0f0f0; /* Light text */
+            background-color: #0a0a0a;
+            color: #f0f0f0;
         }
 
         body.dark-theme h1,
@@ -892,41 +985,41 @@
         body.dark-theme h3,
         body.dark-theme .logo,
         body.dark-theme .nav-links a {
-            color: #f0f0f0; /* Light headings and nav links */
+            color: #f0f0f0;
         }
 
         body.dark-theme nav {
-            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         /* Adjust specific dark theme styles for elements that now have glassmorphism */
         body.dark-theme nav.scrolled {
-            background-color: rgba(255, 255, 255, 0.08); /* Slightly more opaque when scrolled */
+            background-color: rgba(255, 255, 255, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         body.dark-theme .nav-links a.active {
-            text-decoration-color: #f0f0f0; /* Light underline for active link */
+            text-decoration-color: #f0f0f0;
         }
 
         body.dark-theme .hero {
-            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%); /* Adjust hero gradient to match new dark background */
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         body.dark-theme .hero h2,
         body.dark-theme .tagline {
-            color: #cccccc; /* Lighter grey for hero subtext */
-            font-style: italic; /* Tagline italic in dark theme */
+            color: #cccccc;
+            font-style: italic;
         }
 
         body.dark-theme .btn-primary {
-            background-color: #f0f0f0; /* Light button background */
-            color: #1a1a1a; /* Dark button text */
+            background-color: #f0f0f0;
+            color: #1a1a1a;
             border-color: #f0f0f0;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
@@ -938,7 +1031,7 @@
         }
 
         body.dark-theme .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.1); /* Translucent secondary button */
+            background-color: rgba(255, 255, 255, 0.1);
             color: #f0f0f0;
             border-color: #f0f0f0;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
@@ -952,22 +1045,22 @@
 
         body.dark-theme .btn-outline {
             background-color: transparent;
-            border: 2px solid #f0f0f0; /* White outline */
-            color: #f0f0f0; /* White text */
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+            border: 2px solid #f0f0f0;
+            color: #f0f0f0;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
 
         body.dark-theme .btn-outline:hover {
-            background-color: rgba(255, 255, 255, 0.1); /* Slight fill on hover */
+            background-color: rgba(255, 255, 255, 0.1);
             color: #f0f0f0;
             box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
         }
 
         body.dark-theme .about {
-            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         body.dark-theme .about-image {
@@ -979,37 +1072,49 @@
         body.dark-theme .about-summary,
         body.dark-theme .fact-item,
         body.dark-theme .timeline-description,
-        body.dark-theme .contact-item {
-            color: #cccccc; /* Lighter grey for text */
+        body.dark-theme .contact-item,
+        body.dark-theme .skill-item p {
+            color: #cccccc;
         }
 
         body.dark-theme .fact-item strong,
         body.dark-theme .timeline-description strong,
         body.dark-theme .timeline-year {
-            color: #f0f0f0; /* Light strong text and years */
+            color: #f0f0f0;
         }
 
         body.dark-theme .fact-item:nth-child(odd),
         body.dark-theme .fact-item:nth-child(even) {
-            border-color: rgba(255, 255, 255, 0.1); /* Darker borders for glass elements */
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .skill-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-theme .skill-item .icon {
+            color: #f0f0f0;
         }
 
         body.dark-theme .project-card:not(.featured) {
-            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         body.dark-theme .project-card.featured {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(51, 51, 51, 0.4) 100%); /* Keep dark for featured, but make translucent */
-            backdrop-filter: blur(8px); /* Apply blur to featured card too */
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(51, 51, 51, 0.4) 100%);
+            backdrop-filter: blur(8px);
             border: 2px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
         }
 
         body.dark-theme .project-card.featured::before {
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%); /* Lighter shimmer */
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
         }
 
         body.dark-theme .project-card.featured .project-image {
@@ -1039,10 +1144,10 @@
         }
 
         body.dark-theme .timeline-item {
-            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32-3px 0 rgba(0, 0, 0, 0.37);
         }
 
         body.dark-theme .timeline-item::before {
@@ -1051,16 +1156,15 @@
         }
 
         body.dark-theme .hobbies {
-            /* Removed background and glassmorphism from the main hobbies section */
             background-color: transparent;
             box-shadow: none;
             border: none;
             backdrop-filter: none;
         }
 
-        body.dark-theme .hobby-item { /* Specific glassmorphism for hobby items */
+        body.dark-theme .hobby-item {
             background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px); /* Slightly less blur for individual items */
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
         }
@@ -1070,14 +1174,14 @@
         }
 
         body.dark-theme .contact-content {
-            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         body.dark-theme .form-group label {
-            color: #f0f0f0; /* Made labels white in dark theme */
+            color: #f0f0f0;
         }
 
         body.dark-theme .form-group input,
@@ -1102,19 +1206,19 @@
         }
 
         body.dark-theme .resume {
-            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         body.dark-theme footer {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: rgba(255, 255, 255, 0.05); /* Translucent background */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             color: #cccccc;
-            box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.37); /* Diffused shadow */
+            box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         body.dark-theme .footer-links a {
@@ -1132,10 +1236,15 @@
                 text-align: center;
                 padding: 30px;
             }
-
+            
             .about-image {
-                justify-self: center;
+                padding-bottom: 100%; /* Change aspect ratio to square for mobile */
                 margin-bottom: 30px;
+                justify-self: center;
+            }
+
+            .about-image img {
+                border-radius: 50%; /* Change to circular for mobile */
             }
 
             .about-facts {
@@ -1154,6 +1263,10 @@
                 border-bottom: none;
             }
 
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
             .featured-project {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1167,7 +1280,7 @@
                 order: 1;
             }
 
-            .other-projects {
+            .other-projects-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1205,17 +1318,17 @@
 
             /* Adjust nav padding and position for smaller screens if needed */
             nav {
-                width: calc(100% - 20px); /* Slightly less width for very small screens */
-                top: 10px; /* Closer to top */
-                border-radius: 10px; /* Smaller rounded corners */
+                width: calc(100% - 20px);
+                top: 10px;
+                border-radius: 10px;
             }
 
             body {
-                padding-top: 70px; /* Adjust body padding for smaller nav */
+                padding-top: 70px;
             }
 
             section.hero {
-                min-height: calc(100vh - 70px); /* Adjust hero min-height */
+                min-height: calc(100vh - 70px);
             }
 
             .hero h1 {
@@ -1250,9 +1363,11 @@
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="theme-switch-wrapper">
@@ -1282,7 +1397,7 @@
                 <p class="tagline">Turning raw numbers into clear business direction</p>
                 <div class="cta-buttons">
                     <a href="#projects" class="btn btn-primary" aria-label="View my projects">View My Projects</a>
-                    <a href="https://placehold.co/300x200/cccccc/000000?text=Resume+Placeholder" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Download resume PDF">Download Résumé</a>
+                    <a href="https://drive.google.com/drive/folders/1nPKg-6YgoBkMm7DsSK4cjfC459t5fZqY?usp=drive_link" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Download resume PDF">Download Résumé</a>
                 </div>
             </div>
         </div>
@@ -1292,13 +1407,10 @@
     <section id="about">
         <div class="container">
             <div class="about fade-in">
-                <div class="about-image" aria-label="Profile picture placeholder">
-                    RV
-                </div>
                 <div class="about-content">
                     <h2>About Me</h2>
                     <p class="about-summary">
-                        Detail-oriented aspiring Data Analyst skilled in Excel, SQL and Power BI. Adept at designing interactive dashboards, cleaning data and interpreting trends to guide business decisions.
+                        I'm a detail-oriented aspiring <strong>Data Analyst</strong> with a strong foundation in <strong>Excel</strong>, <strong>SQL</strong>, and <strong>Power BI</strong>. My passion lies in transforming raw data into clear, compelling stories that drive strategic business decisions. I am actively seeking opportunities to apply my analytical skills and contribute to a data-driven team.
                     </p>
                     <div class="about-facts">
                         <div class="fact-item">
@@ -1319,6 +1431,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="about-image" aria-label="Profile picture of Raghu Varma">
+                    <img src="https://placehold.co/300x400/F0F0F0/000000?text=Your+Photo" alt="Raghu Varma Profile Photo" >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="fade-in">Skills</h2>
+            <div class="skills-grid fade-in">
+                <div class="skill-item">
+                    <i class="icon fas fa-database"></i>
+                    <h3>Database & Scripting</h3>
+                    <p>SQL ,DBMS </p>
+                </div>
+                <div class="skill-item">
+                    <i class="icon fas fa-chart-pie"></i>
+                    <h3>Business Intelligence</h3>
+                    <p>Power BI, Tableau</p>
+                </div>
+                <div class="skill-item">
+                    <i class="icon fas fa-file-excel"></i>
+                    <h3>Data Analysis Tools</h3>
+                    <p>Microsoft Excel , PowerBI</p>
+                </div>
+               
+                <div class="skill-item">
+                    <i class="icon fas fa-cogs"></i>
+                    <h3>Soft Skills</h3>
+                    <p>Data Storytelling, Problem Solving, Communication</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1332,11 +1477,11 @@
                 <div class="project-card featured">
                     <div class="featured-project">
                         <div class="project-image" aria-label="Amazon Sales Analysis project screenshot">
-                            Amazon Dashboard<br>Screenshot Coming Soon
+                            <img class="project-screenshot" src="https://raghuvarma02.github.io/amazon-sales-analysis-dashboard.png" onerror="this.onerror=null;this.src='https://placehold.co/320x180/BFBFBF/FFFFFF?text=Amazon+Sales+Analysis';" alt="Screenshot of Amazon Sales Analysis Dashboard">
                         </div>
                         <div class="project-content">
                             <h3>🌟 Amazon Sales Analysis (2025)</h3>
-                            <p>Comprehensive analysis of Amazon order data with advanced data cleaning, pivot tables, and interactive Power BI visualizations. Uncovered key revenue drivers, seasonal patterns, and customer behavior insights that drive business decisions.</p>
+                            <p id="amazonDescription">Comprehensive analysis of Amazon order data with advanced data cleaning, pivot tables, and interactive Power BI visualizations. Uncovered key revenue drivers, seasonal patterns, and customer behavior insights that drive business decisions.</p>
                             <div class="project-buttons">
                                 <a href="https://github.com/raghuvarma02/amazon-sales-analysis" class="btn btn-secondary" aria-label="View Amazon project on GitHub">GitHub Repository</a>
                                 <a href="https://app.powerbi.com/view?r=eyJrIjoiYOUR_POWERBI_REPORT_ID" class="btn btn-secondary" aria-label="View Amazon project Power BI dashboard">Power BI Live Dashboard</a>
@@ -1345,33 +1490,35 @@
                     </div>
                 </div>
 
-                <!-- Other Projects -->
-                <div class="project-card">
-                    <div class="project-image" aria-label="Power BI Regional Sales Dashboard project screenshot">
-                        <img src="https://placehold.co/320x180/BFBFBF/FFFFFF?text=PowerBI+Sales" alt="Power BI Regional Sales Dashboard screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                <!-- Other Projects Grid -->
+                <div class="other-projects-grid">
+                    <div class="project-card">
+                        <div class="project-image" aria-label="Power BI Regional Sales Dashboard project screenshot">
+                            <img class="project-screenshot" src="https://raghuvarma02.github.io/powerbi-regional-sales-dashboard.png" onerror="this.onerror=null;this.src='https://placehold.co/320x180/BFBFBF/FFFFFF?text=PowerBI+Sales';" alt="Power BI Regional Sales Dashboard screenshot">
+                        </div>
+                        <h3>Power BI Regional Sales Dashboard (2024)</h3>
+                        <ul id="powerbiDescription">
+                            <li>Designed an interactive Power BI dashboard for category-wise and region-wise sales performance using 5K+ fictional data.</li>
+                            <li>Applied data transformation techniques and DAX measures to extract KPIs such as Sales Growth, Top Products, and Revenue Trends.</li>
+                            <li>Enabled decision-making through slicers and drill-through visuals.</li>
+                        </ul>
+                        <div class="project-buttons">
+                            <a href="https://github.com/raghuvarma02/powerbi-regional-sales" class="btn btn-secondary" aria-label="View Power BI project on GitHub">GitHub</a>
+                        </div>
                     </div>
-                    <h3>Power BI Regional Sales Dashboard (2024)</h3>
-                    <ul>
-                        <li>Designed an interactive Power BI dashboard for category-wise and region-wise sales performance using 5K+ fictional data.</li>
-                        <li>Applied data transformation techniques and DAX measures to extract KPIs such as Sales Growth, Top Products, and Revenue Trends.</li>
-                        <li>Enabled decision-making through slicers and drill-through visuals.</li>
-                    </ul>
-                    <div class="project-buttons">
-                        <a href="https://github.com/USERNAME/powerbi-regional-sales" class="btn btn-secondary" aria-label="View Power BI project on GitHub">GitHub</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image" aria-label="Excel Chocolate Manufacturing Dashboard project screenshot">
-                        <img src="https://placehold.co/320x180/BFBFBF/FFFFFF?text=Excel+Chocolate" alt="Excel Chocolate Manufacturing Dashboard screenshot" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h3>Excel Sales & Performance Dashboard (2024)</h3>
-                    <ul>
-                        <li>Developed an Excel dashboard with dynamic charts and KPIs like Total Revenue, Average Revenue per Salesperson, and Products Sold.</li>
-                        <li>Implemented data bars and a Top 5 Salespersons table with region/category breakdown using conditional formatting and pivot charts.</li>
-                        <li>Focused on clarity and storytelling in layout for non-technical stakeholders.</li>
-                    </ul>
-                    <div class="project-buttons">
-                        <a href="https://github.com/USERNAME/excel-chocolate-dashboard" class="btn btn-secondary" aria-label="View Excel project on GitHub">GitHub</a>
+                    <div class="project-card">
+                        <div class="project-image" aria-label="Excel Chocolate Manufacturing Dashboard project screenshot">
+                            <img class="project-screenshot" src="https://raghuvarma02.github.io/excel-chocolate-dashboard.png" onerror="this.onerror=null;this.src='https://placehold.co/320x180/BFBFBF/FFFFFF?text=Excel+Chocolate';" alt="Excel Chocolate Manufacturing Dashboard screenshot">
+                        </div>
+                        <h3>Excel Sales & Performance Dashboard (2024)</h3>
+                        <ul id="excelDescription">
+                            <li>Developed an Excel dashboard with dynamic charts and KPIs like Total Revenue, Average Revenue per Salesperson, and Products Sold.</li>
+                            <li>Implemented data bars and a Top 5 Salespersons table with region/category breakdown using conditional formatting and pivot charts.</li>
+                            <li>Focused on clarity and storytelling in layout for non-technical stakeholders.</li>
+                        </ul>
+                        <div class="project-buttons">
+                            <a href="https://github.com/raghuvarma02/excel-chocolate-dashboard" class="btn btn-secondary" aria-label="View Excel project on GitHub">GitHub</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1437,6 +1584,54 @@
                         </div>
                     </div>
                 </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-description">
+                        <strong>Deloitte Data Analytics Simulation Certificate</strong><br>
+                        <em>Forage</em>
+                        <div style="margin-top: 15px;">
+                            <a href="https://drive.google.com/file/d/1IlHihQ3CFks-_7INYt0tMWsy4dH2lew5/view?usp=sharing" class="btn btn-outline" target="_blank" rel="noopener noreferrer" aria-label="View Deloitte Data Analytics Certificate">
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-description">
+                        <strong>NISM Investor Awareness Certificate</strong><br>
+                        <em>SEBI</em>
+                        <div style="margin-top: 15px;">
+                            <a href="https://drive.google.com/file/d/1I_B7d4eQJoiR4fx74fgoQlaRVgfhhoPx/view?usp=sharing" class="btn btn-outline" target="_blank" rel="noopener noreferrer" aria-label="View NISM Investor Awareness Certificate">
+                                View Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="achievements">
+        <div class="container">
+            <h2 class="fade-in">Experience</h2>
+            <div class="timeline fade-in">
+                <!-- Example: Add your relevant experience here -->
+                <div class="timeline-item">
+                    <div class="timeline-year">2025 (Summer)</div>
+                    <div class="timeline-description">
+                        <strong>Data Analyst Intern</strong><br>
+                        <em>Innobyte Services</em>
+                        <ul>
+                            <li>Analysed 130K+ rows of Amazon’s 2022 sales data to uncover trends in product demand, customer behaviour, 
+and regional sales performance. </li>
+                            <li>Cleaned and transformed data in Excel; created pivot tables by product category, geography, delivery method, 
+and time period.</li>
+                            <li>Built a branded Power BI dashboard with KPIs, slicers, charts, and maps to visualize insights interactively. </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1467,7 +1662,7 @@
         <div class="container">
             <h2 class="fade-in">Contact Me</h2>
             <div class="contact-content fade-in">
-                <form class="contact-form" action="mailto:raghuvarmauppalapati1@gmail.com" method="POST" enctype="text/plain">
+                <form class="contact-form">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required aria-label="Your name">
@@ -1486,7 +1681,7 @@
                     <h3>Get in Touch</h3>
                     <div class="contact-item">
                         <span><i class="fa-solid fa-envelope"></i></span>
-                        <a href="mailto:raghuvarmauppalapati1@gmail.com" aria-label="Email Raghu">raghuvarmaupalapati1@gmail.com</a>
+                        <a href="mailto:raghuvarmauppalapati1@gmail.com" aria-label="Email Raghu">raghuvarmauppalapati1@gmail.com</a>
                     </div>
                     <div class="contact-item">
                         <span><i class="fab fa-linkedin"></i></span>
@@ -1512,20 +1707,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>© 2025 Raghu Varma Uppalapati</div>
-                <div class="footer-links">
-                    <a href="https://linkedin.com/in/raghuvarmauppalapati" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/raghuvarma02" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="mailto:raghuvarmauppalapati1@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- Google Analytics placeholder -->
     <div id="google-analytics" style="display: none;" data-ua-id="UA-XXXXXXXXX-X"></div>
 
@@ -1548,7 +1729,7 @@
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             // Adjust scroll threshold based on new nav bar position and height
-            if (window.scrollY > 30) { /* Reduced threshold as nav is already lower */
+            if (window.scrollY > 30) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
@@ -1560,9 +1741,9 @@
         const navLinks = document.querySelectorAll('.nav-links a');
 
         const observerOptions = {
-            root: null, // Use the viewport as the root
-            rootMargin: '-50% 0px -50% 0px', // When 50% of the section is in view
-            threshold: 0 // No threshold needed, as rootMargin handles it
+            root: null,
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
         };
 
         const sectionObserver = new IntersectionObserver((entries) => {
@@ -1571,9 +1752,7 @@
                 const correspondingLink = document.querySelector(`.nav-links a[href="#${id}"]`);
 
                 if (entry.isIntersecting) {
-                    // Remove active class from all links first
                     navLinks.forEach(link => link.classList.remove('active'));
-                    // Add active class to the current section's link
                     if (correspondingLink) {
                         correspondingLink.classList.add('active');
                     }
@@ -1581,7 +1760,6 @@
             });
         }, observerOptions);
 
-        // Observe each section
         sections.forEach(section => {
             sectionObserver.observe(section);
         });
@@ -1596,16 +1774,11 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Optional: Unobserve after becoming visible if you only want it to fade in once
-                    // fadeObserver.unobserve(entry.target);
                 } else {
-                    // Optional: Remove 'visible' if you want elements to fade out when scrolled away
-                    // entry.target.classList.remove('visible');
                 }
             });
         }, fadeObserverOptions);
 
-        // Observe all fade-in elements
         document.querySelectorAll('.fade-in').forEach(el => {
             fadeObserver.observe(el);
         });
@@ -1618,35 +1791,33 @@
         const themeToggle = document.getElementById('checkbox');
         const body = document.body;
 
-        // Function to set theme
         function setTheme(isDark) {
             if (isDark) {
                 body.classList.add('dark-theme');
-                themeToggle.checked = false; // Checkbox is unchecked for dark theme
+                themeToggle.checked = false;
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.classList.remove('dark-theme');
-                themeToggle.checked = true; // Checkbox is checked for light theme
+                themeToggle.checked = true;
                 localStorage.setItem('theme', 'light');
             }
         }
 
-        // Load saved theme or default to dark
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
-            setTheme(false); // Apply light theme if saved
+            setTheme(false);
         } else {
-            setTheme(true); // Default to dark theme
+            setTheme(true);
         }
 
-        // Event listener for toggle
         themeToggle.addEventListener('change', () => {
             if (themeToggle.checked) {
-                setTheme(false); // Switch to light
+                setTheme(false);
             } else {
-                setTheme(true); // Switch to dark
+                setTheme(true);
             }
         });
+        
     </script>
 </body>
 </html>
